@@ -22,7 +22,20 @@ app.config.suppress_callback_exceptions = True
 # Load data from csv
 def load_data():
     # To do: Completar la función 
+    file_path = r'C:\Users\adria\OneDrive\Documents\MLOps\datos_energia.csv'
+    df = pd.read_csv(file_path)
     
+    # Convertir el campo 'time' a tipo datetime
+    df['time'] = pd.to_datetime(df['time'])
+    
+    # Renombrar la columna 'time' a 'date'
+    df.rename(columns={'time': 'date'}, inplace=True)
+    
+    # Establecer el campo 'date' como índice
+    df.set_index('date', inplace=True)
+    
+    # Retornar el DataFrame
+    return df
 
 # Cargar datos
 data = load_data()
